@@ -5,6 +5,10 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using KeketteTravel.Presentation;
+using System.Collections.Generic;
+using KeketteTravel.Droid.Converters;
+using System.Linq;
+using System;
 
 namespace KeketteTravel.Droid
 {
@@ -27,17 +31,17 @@ namespace KeketteTravel.Droid
             return mvxFragmentsPresenter;
         }
 
-        //protected override IEnumerable<Type> ValueConverterHolders
-        //{
-        //    get
-        //    {
-        //        return base.ValueConverterHolders
-        //            .Concat(new[]
-        //            {
-        //                typeof(AppConverters)
-        //            });
-        //    }
-        //}
+        protected override IEnumerable<Type> ValueConverterHolders
+        {
+            get
+            {
+                return base.ValueConverterHolders
+                    .Concat(new[]
+                    {
+                        typeof(AppConverters)
+                    });
+            }
+        }
 
         protected override IMvxTrace CreateDebugTrace()
         {

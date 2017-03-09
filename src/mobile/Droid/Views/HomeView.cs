@@ -17,20 +17,10 @@ namespace KeketteTravel.Droid.Views
             this.Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.RequestFeature(WindowFeatures.NoTitle);
 
-            SetContentView(Resource.Layout.Home_Container);
+            SetContentView(Resource.Layout.Home);
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.top_bar);
             SetSupportActionBar(toolbar);
-
-            var fragment = new HomeFragment
-            {
-                ViewModel = ViewModel
-            };
-
-            SupportFragmentManager
-            .BeginTransaction()
-                .Replace(Resource.Id.content_frame_home, fragment, typeof(HomeFragment).FullName)
-            .Commit();
 
             Title = "Kekette Travel";
         }

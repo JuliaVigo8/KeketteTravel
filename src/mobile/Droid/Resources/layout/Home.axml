@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
-    <MvxListView
-        android:layout_height="match_parent"
+    android:id="@+id/frameLayout">
+    <RelativeLayout
         android:layout_width="match_parent"
-        local:MvxBind="ItemsSource Countries"
-        local:MvxItemTemplate="@layout/cell_country"
-        android:id="@+id/countriesListView"
-        android:background="@null"
-        android:paddingBottom="15dp"
-        android:clipToPadding="false" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/main_layout">
+        <android.support.v7.widget.Toolbar
+            android:minHeight="?android:attr/actionBarSize"
+            android:background="@color/main_color"
+            android:minWidth="25px"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:id="@+id/top_bar" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/top_bar">
+            <MvxListView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                local:MvxBind="ItemsSource Countries; ItemClick NavigateToDetails"
+                local:MvxItemTemplate="@layout/cell_country"
+                android:id="@+id/countriesListView"
+                android:background="@null"
+                android:paddingBottom="15dp"
+                android:clipToPadding="false" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

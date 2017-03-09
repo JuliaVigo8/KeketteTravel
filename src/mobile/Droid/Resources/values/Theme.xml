@@ -7,7 +7,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionModeOverlay">false</item>
-        <item name="android:colorPrimaryDark">#325B67</item>
+        <item name="android:colorPrimaryDark">#276765</item>
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 </resources>

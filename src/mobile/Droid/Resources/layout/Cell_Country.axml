@@ -10,17 +10,16 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:gravity="center_vertical">
-    <MvxImageView
+    <RoundedMvxImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        local:MvxBind="ImageUrl ImageUrl"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop" />
+        local:MvxBind="ImageUrl ImageUrl" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
         <TextView
             tools:text="Costa Rica"
             local:MvxBind="Text Name"
@@ -29,14 +28,103 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
-        <TextView
-            tools:text="Costa Rica"
-            local:MvxBind="Text Name"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textColor="@android:color/black" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/accomodationpin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/activitypin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/sightseeingpin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/restaurantpin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/barpin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/sexpin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_marginLeft="2dp"
+                tools:text="0"
+                local:MvxBind="Text Activities, Converter=ActivitiesCountByType, ConverterParameter=5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
     </LinearLayout>
+    <TextView
+        tools:text="0"
+        local:MvxBind="Text Activities.Count"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/black" />
 </LinearLayout>
