@@ -67,6 +67,7 @@ namespace KeketteTravel.Presentation.ViewModels
         private MvxCommand<CountryItemViewModel> _navigateToDetails;
         public IMvxCommand NavigateToDetails => CreateCommand(ref _navigateToDetails, country =>
         {
+            //todo pass country
             ShowViewModel<CountryDetailsViewModel>();
         });
     }

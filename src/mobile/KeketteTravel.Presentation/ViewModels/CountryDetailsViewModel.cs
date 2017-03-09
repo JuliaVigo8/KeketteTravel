@@ -1,5 +1,6 @@
 ﻿using System;
 using MvvmCross.Core.ViewModels;
+using static Amp.MvvmCross.CommandFactory;
 
 namespace KeketteTravel.Presentation.ViewModels
 {
@@ -55,5 +56,12 @@ namespace KeketteTravel.Presentation.ViewModels
                 SetProperty(ref _country, value);
             }
         }
+
+        private MvxCommand<Activity> _navigateToDetails;
+        public IMvxCommand NavigateToDetails => CreateCommand(ref _navigateToDetails, activity =>
+        {
+            //todo pass activity
+            ShowViewModel<ActivityDetailsViewModel>();
+        });
     }
 }

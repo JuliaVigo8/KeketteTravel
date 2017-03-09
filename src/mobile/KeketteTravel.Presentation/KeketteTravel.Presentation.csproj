@@ -36,6 +36,7 @@
     <Compile Include="Converters\ActivitiesCountByTypeConverter.cs" />
     <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\CountryDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ActivityDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding">

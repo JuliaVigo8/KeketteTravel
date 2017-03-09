@@ -173,14 +173,13 @@
     <Compile Include="DebugTrace.cs" />
     <Compile Include="AndroidModule.cs" />
     <Compile Include="ViewPresenter.cs" />
-    <Compile Include="Views\HomeFragment.cs" />
     <Compile Include="Views\BaseFragment.cs" />
     <Compile Include="Bootstrap\FilePluginBootstrap.cs" />
     <Compile Include="Bootstrap\DownloadCachePluginBootstrap.cs" />
     <Compile Include="Controls\RoundedMvxImageView.cs" />
     <Compile Include="Converters\AppConverters.cs" />
     <Compile Include="Views\CountryDetailsView.cs" />
-    <Compile Include="Views\CountryDetailsFragment.cs" />
+    <Compile Include="Views\ActivityDetailsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -221,7 +220,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\sexPin.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\sightseeingPin.png" />
     <AndroidResource Include="Resources\layout\CountryDetails.axml" />
-    <AndroidResource Include="Resources\layout\CountryDetails_Container.axml" />
     <AndroidResource Include="Resources\drawable-mdpi\accomodationMarker.png" />
     <AndroidResource Include="Resources\drawable-mdpi\activityMarker.png" />
     <AndroidResource Include="Resources\drawable-mdpi\barMarker.png" />
@@ -241,6 +239,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\sexMarker.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\sightseeingMarker.png" />
     <AndroidResource Include="Resources\layout\Marker_Activity.axml" />
+    <AndroidResource Include="Resources\layout\ActivityDetails.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KeketteTravel.Presentation\KeketteTravel.Presentation.csproj">
