@@ -21,6 +21,11 @@ namespace KeketteTravel.Presentation.ViewModels
 
     public class Activity
     {
+        public Activity()
+        {
+            PhoneNumber = string.Empty;
+        }
+
         public string Id { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
@@ -38,6 +43,18 @@ namespace KeketteTravel.Presentation.ViewModels
         public string City { get; set; }
         public string PostalCode { get; set; }
 
+        public string Address2
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(PostalCode))
+                {
+                    return $"{PostalCode} {City}";
+                }
+                return $"{City}";
+            }
+        }
+
         public override string ToString()
         {
             if (string.IsNullOrWhiteSpace(PostalCode))
@@ -52,6 +69,11 @@ namespace KeketteTravel.Presentation.ViewModels
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Latitude}, {Longitude}";
+        }
     }
 
     public enum ActivityType

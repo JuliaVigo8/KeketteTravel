@@ -5,7 +5,7 @@ using MvvmCross.Droid.Views;
 namespace KeketteTravel.Droid
 {
     [Activity(
-        Label = "Kekette Travel"
+        Label = "@string/app_name"
         , MainLauncher = true
         , Icon = "@mipmap/icon"
         , Theme = "@style/Theme.Splash"

@@ -47,6 +47,27 @@ namespace KeketteTravel.Droid.Views
             set.Apply();
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.country_details_menu, menu);
+
+            base.OnCreateOptionsMenu(menu);
+
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(Android.Views.IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.action_add:
+                    (ViewModel as CountryDetailsViewModel).NavigateToAddActivity.Execute();
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
+
         public void OnMapReady(GoogleMap googleMap)
         {
             _map = googleMap;

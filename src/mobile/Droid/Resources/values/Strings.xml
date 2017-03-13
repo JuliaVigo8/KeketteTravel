@@ -1,7 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string
-        name="hello">Hello World, Click Me!</string>
-    <string
-        name="app_name">KeketteTravel.Droid</string>
+  <string name="activitydetails_address">ADDRESS</string>
+  <string name="activitydetails_coordinates">COORDINATES</string>
+  <string name="activitydetails_phonenumber">PHONE NUMBER</string>
+  <string name="activitydetails_websiteurl">WEBSITE</string>
+  <string name="addactivity_add">Add</string>
+  <string name="addactivity_city_hint">City</string>
+  <string name="addactivity_coordinates_error">Please specify correct coordinates for this activity</string>
+  <string name="addactivity_description_hint">Description</string>
+  <string name="addactivity_latitude_hint">Latitude</string>
+  <string name="addactivity_longitude_hint">Longitude</string>
+  <string name="addactivity_name_error">Please specify a name for this activity</string>
+  <string name="addactivity_name_hint">Activity Name</string>
+  <string name="addactivity_phonenumber_hint">Phone Number</string>
+  <string name="addactivity_photourl_hint">Photo Url</string>
+  <string name="addactivity_postalcode_hint">Postal Code</string>
+  <string name="addactivity_street_hint">Street</string>
+  <string name="addactivity_title">Add Activity</string>
+  <string name="addactivity_website_hint">Website Url</string>
+  <string name="app_name">Kekette Travel</string>
 </resources>

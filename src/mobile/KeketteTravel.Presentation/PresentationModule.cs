@@ -1,4 +1,9 @@
 ﻿using System;
+using Acr.UserDialogs;
+using Amp.Caching;
+using KeketteTravel.Presentation.PlatformIntegration;
+using MvvmCross.Platform;
+
 namespace KeketteTravel.Presentation
 {
     public static class PresentationModule
@@ -14,6 +19,8 @@ namespace KeketteTravel.Presentation
 
             _isInitialized = true;
 
+            Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
+            Mvx.LazyConstructAndRegisterSingleton<IDataService>(() => new DataService(Mvx.Resolve<ICacheService>()));
         }
     }
 }

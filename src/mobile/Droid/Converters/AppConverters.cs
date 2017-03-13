@@ -18,6 +18,8 @@ namespace KeketteTravel.Droid.Converters
             }
         }
 
-        public readonly ActivitiesCountByTypeConverter ActivitiesCountByType = new ActivitiesCountByTypeConverter();
+        private static readonly ActivitiesCountByTypeConverter ActivitiesCountByType = new ActivitiesCountByTypeConverter();
+        private static readonly StringToVisibilityConverter StringToVisibility = new StringToVisibilityConverter();
+        private static readonly ActivityTypeToImageConverter ActivityTypeToImage = new ActivityTypeToImageConverter();
     }
 }

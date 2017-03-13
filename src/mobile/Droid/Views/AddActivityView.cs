@@ -1,7 +1,6 @@
-using Acr.UserDialogs;
+﻿using System;
 using Android.App;
 using Android.OS;
-using Android.Support.V7.Widget;
 using Android.Views;
 using KeketteTravel.Presentation.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -9,7 +8,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 namespace KeketteTravel.Droid.Views
 {
     [Activity(Theme = "@style/AppTheme")]
-    public class HomeView : MvxCachingFragmentCompatActivity<HomeViewModel>
+    public class AddActivityView : MvxCachingFragmentCompatActivity<AddActivityViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -18,14 +17,12 @@ namespace KeketteTravel.Droid.Views
             this.Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.RequestFeature(WindowFeatures.NoTitle);
 
-            UserDialogs.Init(this);
+            SetContentView(Resource.Layout.AddActivity);
 
-            SetContentView(Resource.Layout.Home);
-
-            var toolbar = FindViewById<Toolbar>(Resource.Id.top_bar);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.top_bar);
             SetSupportActionBar(toolbar);
 
-            Title = Resources.GetString(Resource.String.app_name);
+            Title = Resources.GetString(Resource.String.addactivity_title);
         }
     }
 }
