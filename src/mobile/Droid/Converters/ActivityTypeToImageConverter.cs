@@ -17,56 +17,56 @@ namespace KeketteTravel.Droid.Converters
                 case 0:
                     if (type == ActivityType.Accomodation)
                     {
-                        return "accomodationMarker";
+                        return "accomodationmarker";
                     }
                     else
                     {
-                        return "accomodationPinUnselected";
+                        return "accomodationpinunselected";
                     }
                 case 1:
                     if (type == ActivityType.Activity)
                     {
-                        return "activityMarker";
+                        return "activitymarker";
                     }
                     else
                     {
-                        return "activityPinUnselected";
+                        return "activitypinunselected";
                     }
                 case 2:
                     if (type == ActivityType.SightSeeing)
                     {
-                        return "sightSeeingMarker";
+                        return "sightseeingmarker";
                     }
                     else
                     {
-                        return "sightSeeingPinUnselected";
+                        return "sightseeingpinunselected";
                     }
                 case 3:
                     if (type == ActivityType.Restaurant)
                     {
-                        return "restaurantMarker";
+                        return "restaurantmarker";
                     }
                     else
                     {
-                        return "restaurantPinUnselected";
+                        return "restaurantpinunselected";
                     }
                 case 4:
                     if (type == ActivityType.Bar)
                     {
-                        return "barMarker";
+                        return "barmarker";
                     }
                     else
                     {
-                        return "barPinUnselected";
+                        return "barpinunselected";
                     }
                 case 5:
                     if (type == ActivityType.SexSpot)
                     {
-                        return "sexMarker";
+                        return "sexmarker";
                     }
                     else
                     {
-                        return "sexPinUnselected";
+                        return "sexpinunselected";
                     }
                 default:
                     return string.Empty;

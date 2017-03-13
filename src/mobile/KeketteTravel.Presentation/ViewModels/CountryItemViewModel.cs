@@ -24,6 +24,7 @@ namespace KeketteTravel.Presentation.ViewModels
         public Activity()
         {
             PhoneNumber = string.Empty;
+            WebsiteUrl = string.Empty;
         }
 
         public string Id { get; set; }

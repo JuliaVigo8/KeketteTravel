@@ -197,6 +197,7 @@ namespace KeketteTravel.Presentation.ViewModels
 
             var activity = new Activity()
             {
+                Id = Guid.NewGuid().ToString(),
                 Name = Name,
                 Description = Description,
                 Type = Type,

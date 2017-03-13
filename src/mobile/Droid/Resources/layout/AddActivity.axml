@@ -50,42 +50,42 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:src="@drawable/accomodationmarker"
-                        local:MvxBind="Click ClickOnAccomodationType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=0"
+                        local:MvxBind="Click ClickOnAccomodationType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                     <ImageView
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/activitypinunselected"
-                        local:MvxBind="Click ClickOnActivityType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=1"
+                        local:MvxBind="Click ClickOnActivityType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                     <ImageView
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/sightseeingpinunselected"
-                        local:MvxBind="Click ClickOnSightseeingType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=2"
+                        local:MvxBind="Click ClickOnSightseeingType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                     <ImageView
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/restaurantpinunselected"
-                        local:MvxBind="Click ClickOnRestaurantType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=3"
+                        local:MvxBind="Click ClickOnRestaurantType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                     <ImageView
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/barpinunselected"
-                        local:MvxBind="Click ClickOnBarType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=4"
+                        local:MvxBind="Click ClickOnBarType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                     <ImageView
                         android:layout_marginLeft="10dp"
                         android:src="@drawable/sexpinunselected"
-                        local:MvxBind="Click ClickOnSexSpotType, DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=5"
+                        local:MvxBind="Click ClickOnSexSpotType; DrawableName Type, Converter=ActivityTypeToImage, ConverterParameter=5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
