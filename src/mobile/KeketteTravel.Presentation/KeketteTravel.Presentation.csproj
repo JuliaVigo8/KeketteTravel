@@ -34,7 +34,6 @@
     <Compile Include="PresentationModule.cs" />
     <Compile Include="ViewModels\CountryItemViewModel.cs" />
     <Compile Include="Converters\ActivitiesCountByTypeConverter.cs" />
-    <Compile Include="ViewModels\FirstViewModel.cs" />
     <Compile Include="ViewModels\CountryDetailsViewModel.cs" />
     <Compile Include="ViewModels\ActivityDetailsViewModel.cs" />
     <Compile Include="Localization\Master.Designer.cs">
@@ -45,6 +44,7 @@
     <Compile Include="PlatformIntegration\DataService.cs" />
     <Compile Include="ViewModels\AddActivityViewModel.cs" />
     <Compile Include="Messages\DataUpdatedMessage.cs" />
+    <Compile Include="Converters\IdToButtonStringConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MvvmCross.Binding">

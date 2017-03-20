@@ -195,8 +195,7 @@
                     android:layout_marginBottom="10dp"
                     android:hint="@string/addactivity_website_hint" />
                 <Button
-                    local:MvxBind="Click Add"
-                    android:text="@string/addactivity_add"
+                    local:MvxBind="Click Add; Text Id, Converter=IdToButtonString"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"

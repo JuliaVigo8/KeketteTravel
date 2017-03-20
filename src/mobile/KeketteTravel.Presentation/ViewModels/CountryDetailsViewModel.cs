@@ -18,7 +18,7 @@ namespace KeketteTravel.Presentation.ViewModels
         {
             _dataService = dataService;
 
-            _dataUpdatedMessageToken = messenger.Subscribe<DataUpdatedMessage>(OnDataUpdated);
+            _dataUpdatedMessageToken = messenger.SubscribeOnMainThread<DataUpdatedMessage>(OnDataUpdated);
         }
 
         public void Init(string countryId)
@@ -43,6 +43,31 @@ namespace KeketteTravel.Presentation.ViewModels
                 SetProperty(ref _country, value);
             }
         }
+
+        private bool _isShowingList;
+        public bool IsShowingList
+        {
+            get
+            {
+                return _isShowingList;
+            }
+            set
+            {
+                SetProperty(ref _isShowingList, value);
+            }
+        }
+
+        private MvxCommand _showMap;
+        public IMvxCommand ShowMap => CreateCommand(ref _showMap, () =>
+        {
+            IsShowingList = false;
+        });
+
+        private MvxCommand _showList;
+        public IMvxCommand ShowList => CreateCommand(ref _showList, () =>
+        {
+            IsShowingList = true;
+        });
 
         private MvxCommand<Activity> _navigateToDetails;
         public IMvxCommand NavigateToDetails => CreateCommand(ref _navigateToDetails, activity =>

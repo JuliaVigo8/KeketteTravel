@@ -83,6 +83,12 @@ namespace KeketteTravel.Presentation.Localization {
             }
         }
         
+        internal static string addactivity_title_edit {
+            get {
+                return ResourceManager.GetString("addactivity_title_edit", resourceCulture);
+            }
+        }
+        
         internal static string addactivity_name_hint {
             get {
                 return ResourceManager.GetString("addactivity_name_hint", resourceCulture);
@@ -158,6 +164,24 @@ namespace KeketteTravel.Presentation.Localization {
         internal static string addactivity_coordinates_error {
             get {
                 return ResourceManager.GetString("addactivity_coordinates_error", resourceCulture);
+            }
+        }
+        
+        internal static string addactivity_edit {
+            get {
+                return ResourceManager.GetString("addactivity_edit", resourceCulture);
+            }
+        }
+        
+        internal static string countrydetails_map {
+            get {
+                return ResourceManager.GetString("countrydetails_map", resourceCulture);
+            }
+        }
+        
+        internal static string countrydetails_list {
+            get {
+                return ResourceManager.GetString("countrydetails_list", resourceCulture);
             }
         }
     }

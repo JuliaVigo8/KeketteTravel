@@ -26,9 +26,39 @@ namespace KeketteTravel.Presentation.ViewModels
             _messenger = messenger;
         }
 
-        public void Init(string countryId)
+        public void Init(string countryId, string activityId)
         {
             _countryId = countryId;
+
+            if (!string.IsNullOrWhiteSpace(activityId))
+            {
+                var activity = _dataService.GetActivity(countryId, activityId);
+                Id = activity.Id;
+                Name = activity.Name;
+                Description = activity.Description;
+                Street = activity.Address.Street;
+                PostalCode = activity.Address.PostalCode;
+                City = activity.Address.City;
+                Latitude = activity.Position.Latitude.ToString();
+                Longitude = activity.Position.Longitude.ToString();
+                PhotoUrl = activity.ImageUrl;
+                WebsiteUrl = activity.WebsiteUrl;
+                PhoneNumber = activity.PhoneNumber;
+                Type = activity.Type;
+            }
+        }
+
+        private string _id;
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                SetProperty(ref _id, value);
+            }
         }
 
         private string _name;
@@ -197,7 +227,7 @@ namespace KeketteTravel.Presentation.ViewModels
 
             var activity = new Activity()
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = string.IsNullOrWhiteSpace(Id) ? Guid.NewGuid().ToString() : Id,
                 Name = Name,
                 Description = Description,
                 Type = Type,
@@ -217,7 +247,14 @@ namespace KeketteTravel.Presentation.ViewModels
                 PhoneNumber = PhoneNumber
             };
 
-            await _dataService.AddActivity(_countryId, activity);
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                await _dataService.AddActivity(_countryId, activity);
+            }
+            else
+            {
+                await _dataService.EditActivity(_countryId, activity);
+            }
             _messenger.Publish(new DataUpdatedMessage(this));
             Close(this);
         });

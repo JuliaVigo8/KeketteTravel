@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_map_add"
+    <item android:id="@+id/action_list_add"
         android:icon="@drawable/add"
         android:title=""
         app:showAsAction="always" />
-    <item android:id="@+id/action_showList"
-        android:title="@string/countrydetails_list"
+    <item android:id="@+id/action_showMap"
+        android:title="@string/countrydetails_map"
         app:showAsAction="always"/>
 </menu>

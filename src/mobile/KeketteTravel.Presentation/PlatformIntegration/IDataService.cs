@@ -11,5 +11,6 @@ namespace KeketteTravel.Presentation.PlatformIntegration
         CountryItemViewModel GetCountry(string id);
         Activity GetActivity(string countryId, string id);
         Task AddActivity(string countryId, Activity activity);
+        Task EditActivity(string countryId, Activity activity);
     }
 }

@@ -12,6 +12,27 @@ namespace KeketteTravel.Droid.Converters
             var type = (ActivityType)value;
             var typeParam = int.Parse(parameter.ToString());
 
+            if (typeParam == -1)
+            {
+                switch (type)
+                {
+                    case ActivityType.Accomodation:
+                        return "accomodationmarker";
+                    case ActivityType.Activity:
+                        return "activitymarker";
+                    case ActivityType.SightSeeing:
+                        return "sightseeingmarker";
+                    case ActivityType.Restaurant:
+                        return "restaurantmarker";
+                    case ActivityType.Bar:
+                        return "barmarker";
+                    case ActivityType.SexSpot:
+                        return "sexmarker";
+                    default:
+                        return string.Empty;
+                }
+            }
+
             switch (typeParam)
             {
                 case 0:

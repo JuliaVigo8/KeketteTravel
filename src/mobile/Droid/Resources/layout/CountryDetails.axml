@@ -17,12 +17,11 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:id="@+id/top_bar" />
-        <fragment
-            android:id="@+id/mapFragment"
+        <FrameLayout
+            android:id="@+id/content_frame_country"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:layout_below="@id/top_bar"
-            class="com.google.android.gms.maps.SupportMapFragment" />
+            android:layout_below="@id/top_bar" />
     </RelativeLayout>
 </FrameLayout>

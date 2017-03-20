@@ -224,6 +224,8 @@
     <Compile Include="Views\AddActivityView.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
     <Compile Include="Converters\ActivityTypeToImageConverter.cs" />
+    <Compile Include="Views\CountryDetailsMap.cs" />
+    <Compile Include="Views\CountryDetailsList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -307,6 +309,11 @@
     <AndroidResource Include="Resources\drawable-mdpi\barPinUnselected.png" />
     <AndroidResource Include="Resources\drawable-mdpi\sexPinUnselected.png" />
     <AndroidResource Include="Resources\drawable-mdpi\sightseeingPinUnselected.png" />
+    <AndroidResource Include="Resources\layout\CountryDetails_Map.axml" />
+    <AndroidResource Include="Resources\layout\CountryDetails_List.axml" />
+    <AndroidResource Include="Resources\menu\country_details_list_menu.xml" />
+    <AndroidResource Include="Resources\layout\Cell_Activity.axml" />
+    <AndroidResource Include="Resources\menu\activity_details_menu.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KeketteTravel.Presentation\KeketteTravel.Presentation.csproj">

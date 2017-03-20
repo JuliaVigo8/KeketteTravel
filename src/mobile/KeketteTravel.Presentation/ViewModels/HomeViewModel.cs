@@ -21,7 +21,7 @@ namespace KeketteTravel.Presentation.ViewModels
         {
             _dataService = dataService;
 
-            _dataUpdatedMessageToken = messenger.Subscribe<DataUpdatedMessage>(OnDataUpdated);
+            _dataUpdatedMessageToken = messenger.SubscribeOnMainThread<DataUpdatedMessage>(OnDataUpdated);
         }
 
         public override async void Start()

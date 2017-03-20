@@ -30,5 +30,26 @@ namespace KeketteTravel.Droid.Views
 
             set.Apply();
         }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.activity_details_menu, menu);
+
+            base.OnCreateOptionsMenu(menu);
+
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.action_edit:
+                    (ViewModel as ActivityDetailsViewModel).NavigateToEdit.Execute();
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
     }
 }

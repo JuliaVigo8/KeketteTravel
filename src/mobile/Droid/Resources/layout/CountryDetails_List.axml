@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <MvxListView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        local:MvxBind="ItemsSource Country.Activities; ItemClick NavigateToDetails"
+        local:MvxItemTemplate="@layout/cell_activity"
+        android:id="@+id/activitiesListView"
+        android:background="@null"
+        android:paddingBottom="15dp"
+        android:clipToPadding="false" />
+</LinearLayout>

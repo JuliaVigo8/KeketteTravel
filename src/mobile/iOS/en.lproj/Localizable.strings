@@ -6,6 +6,7 @@
 "addactivity_city_hint"="City";
 "addactivity_coordinates_error"="Please specify correct coordinates for this activity";
 "addactivity_description_hint"="Description";
+"addactivity_edit"="Edit";
 "addactivity_latitude_hint"="Latitude";
 "addactivity_longitude_hint"="Longitude";
 "addactivity_name_error"="Please specify a name for this activity";
@@ -15,5 +16,8 @@
 "addactivity_postalcode_hint"="Postal Code";
 "addactivity_street_hint"="Street";
 "addactivity_title"="Add Activity";
+"addactivity_title_edit"="Edit Activity";
 "addactivity_website_hint"="Website Url";
 "app_name"="Kekette Travel";
+"countrydetails_list"="List";
+"countrydetails_map"="Map";

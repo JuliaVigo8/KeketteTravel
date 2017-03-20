@@ -8,6 +8,7 @@
   <string name="addactivity_city_hint">City</string>
   <string name="addactivity_coordinates_error">Please specify correct coordinates for this activity</string>
   <string name="addactivity_description_hint">Description</string>
+  <string name="addactivity_edit">Edit</string>
   <string name="addactivity_latitude_hint">Latitude</string>
   <string name="addactivity_longitude_hint">Longitude</string>
   <string name="addactivity_name_error">Please specify a name for this activity</string>
@@ -17,6 +18,9 @@
   <string name="addactivity_postalcode_hint">Postal Code</string>
   <string name="addactivity_street_hint">Street</string>
   <string name="addactivity_title">Add Activity</string>
+  <string name="addactivity_title_edit">Edit Activity</string>
   <string name="addactivity_website_hint">Website Url</string>
   <string name="app_name">Kekette Travel</string>
+  <string name="countrydetails_list">List</string>
+  <string name="countrydetails_map">Map</string>
 </resources>

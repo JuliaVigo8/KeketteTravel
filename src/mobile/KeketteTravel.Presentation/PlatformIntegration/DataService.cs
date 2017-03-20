@@ -108,6 +108,13 @@ namespace KeketteTravel.Presentation.PlatformIntegration
             await UpdateData(_data);
         }
 
+        public async Task EditActivity(string countryId, Activity activity)
+        {
+            var index = _data.FirstOrDefault(c => c.Id == countryId).Activities.FindIndex(a => a.Id == activity.Id);
+            _data.FirstOrDefault(c => c.Id == countryId).Activities[index] = activity;
+            await UpdateData(_data);
+        }
+
         private async Task UpdateData(List<CountryItemViewModel> data)
         {
             await _cacheService.Set(DataCacheKey, _data);

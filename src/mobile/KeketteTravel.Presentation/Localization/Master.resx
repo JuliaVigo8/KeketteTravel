@@ -34,6 +34,9 @@
     <data name="addactivity_title" xml:space="preserve">
         <value>Add Activity</value>
     </data>
+    <data name="addactivity_title_edit" xml:space="preserve">
+        <value>Edit Activity</value>
+    </data>
     <data name="addactivity_name_hint" xml:space="preserve">
         <value>Activity Name</value>
     </data>
@@ -72,5 +75,14 @@
     </data>
     <data name="addactivity_coordinates_error" xml:space="preserve">
         <value>Please specify correct coordinates for this activity</value>
+    </data>
+    <data name="addactivity_edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="countrydetails_map" xml:space="preserve">
+        <value>Map</value>
+    </data>
+    <data name="countrydetails_list" xml:space="preserve">
+        <value>List</value>
     </data>
 </root>

@@ -3,6 +3,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using KeketteTravel.Presentation.ViewModels;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace KeketteTravel.Droid.Views
@@ -23,6 +24,15 @@ namespace KeketteTravel.Droid.Views
             SetSupportActionBar(toolbar);
 
             Title = Resources.GetString(Resource.String.addactivity_title);
+
+            var set = this.CreateBindingSet<AddActivityView, AddActivityViewModel>();
+
+            set.Bind()
+                .For(v => v.Title)
+                .To(vm => vm.Id)
+                .WithConversion("IdToButtonString", "Title");
+
+            set.Apply();
         }
     }
 }
