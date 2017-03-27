@@ -75,10 +75,10 @@ namespace KeketteTravel.Presentation.ViewModels
             ShowViewModel<ActivityDetailsViewModel>(new { countryId = Country.Id, activityId = activity.Id });
         });
 
-        private MvxCommand<Activity> _navigateToAddActivity;
-        public IMvxCommand NavigateToAddActivity => CreateCommand(ref _navigateToAddActivity, activity =>
+        private MvxCommand<Position> _navigateToAddActivity;
+        public IMvxCommand NavigateToAddActivity => CreateCommand(ref _navigateToAddActivity, position =>
         {
-            ShowViewModel<AddActivityViewModel>(new { countryId = Country.Id });
+            ShowViewModel<AddActivityViewModel>(new { countryId = Country.Id, x = position.X, y = position.Y });
         });
     }
 }

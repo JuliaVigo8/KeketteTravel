@@ -15,6 +15,7 @@ namespace KeketteTravel.Presentation.ViewModels
         private readonly IUserDialogs _dialogs;
         private readonly IMvxMessenger _messenger;
         private string _countryId;
+        private Position _position;
 
         public AddActivityViewModel(
             IDataService dataService, 
@@ -26,9 +27,10 @@ namespace KeketteTravel.Presentation.ViewModels
             _messenger = messenger;
         }
 
-        public void Init(string countryId, string activityId)
+        public void Init(string countryId, string activityId, double x, double y)
         {
             _countryId = countryId;
+            _position = new Position(x, y);
 
             if (!string.IsNullOrWhiteSpace(activityId))
             {
@@ -39,8 +41,7 @@ namespace KeketteTravel.Presentation.ViewModels
                 Street = activity.Address.Street;
                 PostalCode = activity.Address.PostalCode;
                 City = activity.Address.City;
-                Latitude = activity.Position.Latitude.ToString();
-                Longitude = activity.Position.Longitude.ToString();
+                _position = activity.Position;
                 PhotoUrl = activity.ImageUrl;
                 WebsiteUrl = activity.WebsiteUrl;
                 PhoneNumber = activity.PhoneNumber;
@@ -126,32 +127,6 @@ namespace KeketteTravel.Presentation.ViewModels
             }
         }
 
-        private string _latitude;
-        public string Latitude
-        {
-            get
-            {
-                return _latitude;
-            }
-            set
-            {
-                SetProperty(ref _latitude, value);
-            }
-        }
-
-        private string _longitude;
-        public string Longitude
-        {
-            get
-            {
-                return _longitude;
-            }
-            set
-            {
-                SetProperty(ref _longitude, value);
-            }
-        }
-
         private string _photoUrl;
         public string PhotoUrl
         {
@@ -213,18 +188,6 @@ namespace KeketteTravel.Presentation.ViewModels
                 return;
             }
 
-            double latitude;
-            double longitude;
-
-            var successLatitude = double.TryParse(Latitude, out latitude);
-            var successLongitude = double.TryParse(Longitude, out longitude);
-
-            if (!(successLatitude && latitude != default(double)) || !(successLongitude && longitude != default(double)))
-            {
-                _dialogs.Alert(Master.addactivity_coordinates_error);
-                return;
-            }
-
             var activity = new Activity()
             {
                 Id = string.IsNullOrWhiteSpace(Id) ? Guid.NewGuid().ToString() : Id,
@@ -237,11 +200,7 @@ namespace KeketteTravel.Presentation.ViewModels
                     PostalCode = PostalCode,
                     City = City
                 },
-                Position = new Position()
-                {
-                    Latitude = latitude,
-                    Longitude = longitude
-                },
+                Position = _position,
                 ImageUrl = PhotoUrl,
                 WebsiteUrl = WebsiteUrl,
                 PhoneNumber = PhoneNumber

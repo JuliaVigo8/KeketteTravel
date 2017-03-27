@@ -25,9 +25,6 @@ namespace KeketteTravel.Droid.Views
         {
             switch (item.ItemId)
             {
-                case Resource.Id.action_list_add:
-                    (ViewModel as CountryDetailsViewModel).NavigateToAddActivity.Execute();
-                    break;
                 case Resource.Id.action_showMap:
                     (ViewModel as CountryDetailsViewModel).ShowMap.Execute();
                     break;

@@ -69,8 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1">
+                        android:layout_marginRight="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -89,29 +88,6 @@
                         <TextView
                             local:MvxBind="Text Activity.Address.Address2"
                             tools:text="Address line 2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:textStyle="normal"
-                            android:textColor="@android:color/black" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/main_color"
-                            android:text="@string/activitydetails_coordinates" />
-                        <TextView
-                            tools:text="Coordinates"
-                            local:MvxBind="Text Activity.Position"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="16sp"

@@ -1,46 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
+using System.Reflection;
+using System.Threading.Tasks;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
+using Esri.ArcGISRuntime.Data;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Mapping;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.UI;
+using Esri.ArcGISRuntime.UI.Controls;
 using KeketteTravel.Presentation.ViewModels;
 using MvvmCross.Binding.BindingContext;
 
 namespace KeketteTravel.Droid.Views
 {
-    public class CountryDetailsMap : BaseFragment, IOnMapReadyCallback, GoogleMap.IOnInfoWindowClickListener, GoogleMap.IInfoWindowAdapter
+    public class CountryDetailsMap : BaseFragment
     {
         protected override int FragmentId => Resource.Layout.CountryDetails_Map;
-        private GoogleMap _map;
-        private List<Marker> _activityMarkers;
         private Dictionary<string, Activity> _activityByMarker;
-        private Marker _showingInfoWindowMarker;
+        private LinearLayout _mapLayout;
+        private GraphicsOverlay _overlay;
+        private MapView _mapView = new MapView();
 
         public override void OnViewCreated(View view, Android.OS.Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
 
-            _activityMarkers = new List<Marker>();
+            //_activityMarkers = new List<Marker>();
             _activityByMarker = new Dictionary<string, Activity>();
+
+            _mapLayout = view.FindViewById<LinearLayout>(Resource.Id.mapLayout);
 
             HasOptionsMenu = true;
 
-            var mapFragment = (SupportMapFragment)ChildFragmentManager.FindFragmentById(Resource.Id.mapFragment);
-            mapFragment.GetMapAsync(this);
+            var set = this.CreateBindingSet<CountryDetailsMap, CountryDetailsViewModel>();
+
+            set.Bind()
+               .For(v => v.Country)
+               .To(vm => vm.Country);
+
+            set.Apply();
         }
 
-        // TODO find another way to refresh map
-        //public override void OnResume()
-        //{
-        //    base.OnResume();
+        async void OnMapViewTapped(object sender, GeoViewInputEventArgs e)
+        {
+            foreach (var marker in _overlay.Graphics)
+            {
+                var mapPoint = new MapPoint(marker.Geometry.Extent.XMax, marker.Geometry.Extent.YMax, SpatialReferences.WebMercator);
+                var point = _mapView.LocationToScreen(mapPoint);
 
-        //    if (_showingInfoWindowMarker != null && _showingInfoWindowMarker.IsInfoWindowShown)
-        //    {
-        //        _showingInfoWindowMarker.ShowInfoWindow();
-        //    }
-        //}
+                if (point.X <= e.Position.X + 60 && point.X >= e.Position.X - 60 && point.Y <= e.Position.Y + 60 && point.Y >= e.Position.Y - 60)
+                {
+                    var activity = _country.Activities
+                                           .FirstOrDefault(a => a.Position.X == marker.Geometry.Extent.XMax
+                                                           && a.Position.Y == marker.Geometry.Extent.YMax);
+                    (ViewModel as CountryDetailsViewModel).NavigateToDetails.Execute(activity);
+                    return;
+                }
+            }
+
+            (ViewModel as CountryDetailsViewModel).NavigateToAddActivity.Execute(new Position(e.Location.X, e.Location.Y));
+        }
 
         private CountryItemViewModel _country;
         public CountryItemViewModel Country
@@ -53,69 +78,93 @@ namespace KeketteTravel.Droid.Views
             {
                 _country = value;
 
-                if (_map == null)
-                {
-                    return;
-                }
+                // Create a new Map instance with the basemap               
+                var map = new Map(Basemap.CreateStreetsVector());
 
-                foreach (var marker in _activityMarkers)
-                {
-                    if (_country.Activities.FirstOrDefault(a => a.Id == marker.Id) == null)
-                    {
-                        marker.Remove();
-                    }
-                }
+                var initialLocation = new Envelope(
+                    _country.TopLeftPosition.X, 
+                    _country.TopLeftPosition.Y,
+                    _country.BottomRightPosition.X,
+                    _country.BottomRightPosition.Y,
+                    SpatialReferences.WebMercator);
+                
+                map.InitialViewpoint = new Viewpoint(initialLocation);
 
-                foreach (var activity in _country.Activities)
-                {
-                    if (activity.Position != null && _activityMarkers.FirstOrDefault(m => m.Title == activity.Id) == null)
-                    {
-                        var markerOptions = new MarkerOptions();
-                        markerOptions.SetPosition(new LatLng(activity.Position.Latitude, activity.Position.Longitude));
+                // Provide used Map to the MapView
+                _mapView.Map = map;
 
-                        switch (activity.Type)
-                        {
-                            case ActivityType.Accomodation:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.accomodationMarker));
-                                break;
-                            case ActivityType.Activity:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.activityMarker));
-                                break;
-                            case ActivityType.Bar:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.barMarker));
-                                break;
-                            case ActivityType.Restaurant:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.restaurantMarker));
-                                break;
-                            case ActivityType.SexSpot:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.sexMarker));
-                                break;
-                            case ActivityType.SightSeeing:
-                                markerOptions.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.sightseeingMarker));
-                                break;
-                        }
+                _mapView.GeoViewTapped += OnMapViewTapped;
 
-                        var marker = _map?.AddMarker(markerOptions);
-                        if (marker != null)
-                        {
-                            _activityMarkers.Add(marker);
-                            marker.Title = activity.Id;
-                            _activityByMarker.Add(marker.Title, activity);
-                        }
-                    }
-                }
+                // Create overlay to where graphics are shown
+                _overlay = new GraphicsOverlay();
 
-                var builder = new LatLngBounds.Builder();
-                builder.Include(new LatLng(_country.TopLeftPosition.Latitude, _country.TopLeftPosition.Longitude));
-                builder.Include(new LatLng(_country.BottomRightPosition.Latitude, _country.BottomRightPosition.Longitude));
-                var bounds = builder.Build();
+                SetMarkers();
 
-                var width = Resources.DisplayMetrics.WidthPixels;
-                var height = Resources.DisplayMetrics.HeightPixels;
+                // Add created overlay to the MapView
+                _mapView.GraphicsOverlays.Add(_overlay);
 
-                var cameraUpdate = CameraUpdateFactory.NewLatLngBounds(bounds, width, height, 0);
-                _map?.AnimateCamera(cameraUpdate);
+                _mapLayout.AddView(_mapView);
             }
+        }
+
+        private void SetMarkers()
+        {
+            foreach (var activity in _country.Activities)
+            {
+                if (activity.Position != null)
+                {
+                    switch (activity.Type)
+                    {
+                        case ActivityType.Accomodation:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.accomodationMarker),
+                                activity.Position);
+                            break;
+                        case ActivityType.Activity:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.activityMarker),
+                                activity.Position);
+                            break;
+                        case ActivityType.Bar:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.barMarker),
+                                activity.Position);
+                            break;
+                        case ActivityType.Restaurant:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.restaurantMarker),
+                                activity.Position);
+                            break;
+                        case ActivityType.SexSpot:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.sexMarker),
+                                activity.Position);
+                            break;
+                        case ActivityType.SightSeeing:
+                            CreatePictureMarkerSymbolFromResources(
+                                Resources.OpenRawResource(Resource.Drawable.sightseeingMarker),
+                                activity.Position);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private async void CreatePictureMarkerSymbolFromResources(Stream resourceStream, Position location)
+        {
+            // Create new symbol using asynchronous factory method from stream
+            var pinSymbol = await PictureMarkerSymbol.CreateAsync(resourceStream);
+
+            //var pinSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Circle, System.Drawing.Color.AliceBlue, 12);
+
+            // Create location for the pint
+            var pinPoint = new MapPoint(location.X, location.Y, SpatialReferences.WebMercator);
+
+            // Create graphic with the location and symbol
+            var pinGraphic = new Graphic(pinPoint, pinSymbol);
+
+            // Add graphic to the graphics overlay
+            _overlay.Graphics.Add(pinGraphic);
         }
 
         public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
@@ -128,9 +177,6 @@ namespace KeketteTravel.Droid.Views
         {
             switch (item.ItemId)
             {
-                case Resource.Id.action_map_add:
-                    (ViewModel as CountryDetailsViewModel).NavigateToAddActivity.Execute();
-                    break;
                 case Resource.Id.action_showList:
                     (ViewModel as CountryDetailsViewModel).ShowList.Execute();
                     break;
@@ -139,65 +185,50 @@ namespace KeketteTravel.Droid.Views
             return base.OnOptionsItemSelected(item);
         }
 
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            _map = googleMap;
-            _map.SetInfoWindowAdapter(this);
-            _map.SetOnInfoWindowClickListener(this);
+        //public View GetInfoContents(Marker marker)
+        //{
+        //    _showingInfoWindowMarker = marker;
 
-            var set = this.CreateBindingSet<CountryDetailsMap, CountryDetailsViewModel>();
+        //    var view = Activity.LayoutInflater.Inflate(Resource.Layout.Marker_Activity, null);
 
-            set.Bind()
-               .For(v => v.Country)
-               .To(vm => vm.Country);
+        //    var activity = GetActivityForMarker(marker);
 
-            set.Apply();
-        }
+        //    if (activity == null)
+        //    {
+        //        return null;
+        //    }
 
-        public View GetInfoContents(Marker marker)
-        {
-            _showingInfoWindowMarker = marker;
+        //    var activityNameTextView = view.FindViewById<TextView>(Resource.Id.activityNameTextView);
+        //    activityNameTextView.Text = activity.Name;
 
-            var view = Activity.LayoutInflater.Inflate(Resource.Layout.Marker_Activity, null);
+        //    var activityAdressTextView = view.FindViewById<TextView>(Resource.Id.activityAdressTextView);
+        //    activityAdressTextView.Text = activity.Address.ToString();
 
-            var activity = GetActivityForMarker(marker);
+        //    return view;
+        //}
 
-            if (activity == null)
-            {
-                return null;
-            }
+        //public Activity GetActivityForMarker(Marker marker)
+        //{
+        //    if (_activityByMarker.ContainsKey(marker.Title))
+        //    {
+        //        return _activityByMarker[marker.Title];
+        //    }
+        //    return null;
+        //}
 
-            var activityNameTextView = view.FindViewById<TextView>(Resource.Id.activityNameTextView);
-            activityNameTextView.Text = activity.Name;
+        //public View GetInfoWindow(Marker marker)
+        //{
+        //    return null;
+        //}
 
-            var activityAdressTextView = view.FindViewById<TextView>(Resource.Id.activityAdressTextView);
-            activityAdressTextView.Text = activity.Address.ToString();
+        //public void OnInfoWindowClick(Marker marker)
+        //{
+        //    var activity = GetActivityForMarker(marker);
 
-            return view;
-        }
-
-        public Activity GetActivityForMarker(Marker marker)
-        {
-            if (_activityByMarker.ContainsKey(marker.Title))
-            {
-                return _activityByMarker[marker.Title];
-            }
-            return null;
-        }
-
-        public View GetInfoWindow(Marker marker)
-        {
-            return null;
-        }
-
-        public void OnInfoWindowClick(Marker marker)
-        {
-            var activity = GetActivityForMarker(marker);
-
-            if (activity != null)
-            {
-                (ViewModel as CountryDetailsViewModel).NavigateToDetails.Execute(activity);
-            }
-        }
+        //    if (activity != null)
+        //    {
+        //        (ViewModel as CountryDetailsViewModel).NavigateToDetails.Execute(activity);
+        //    }
+        //}
     }
 }

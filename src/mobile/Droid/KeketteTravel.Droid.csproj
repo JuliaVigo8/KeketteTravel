@@ -198,6 +198,9 @@
     <Reference Include="MvvmCross.Plugins.Messenger">
       <HintPath>..\packages\MvvmCross.Plugin.Messenger.4.4.0\lib\MonoAndroid\MvvmCross.Plugins.Messenger.dll</HintPath>
     </Reference>
+    <Reference Include="Esri.ArcGISRuntime">
+      <HintPath>..\packages\Esri.ArcGISRuntime.Xamarin.Android.100.0.0\lib\MonoAndroid10\Esri.ArcGISRuntime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />

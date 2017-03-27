@@ -68,12 +68,18 @@ namespace KeketteTravel.Presentation.ViewModels
 
     public class Position
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public Position(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public double X { get; set; }
+        public double Y { get; set; }
 
         public override string ToString()
         {
-            return $"{Latitude}, {Longitude}";
+            return $"{X}, {Y}";
         }
     }
 
